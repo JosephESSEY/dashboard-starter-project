@@ -18,9 +18,10 @@ import { motion } from 'framer-motion'
 interface TopbarProps {
   title?: string
   breadcrumbs?: Array<{ label: string; href?: string }>
+  onMenuClick?: () => void
 }
 
-export function Topbar({ title, breadcrumbs }: TopbarProps) {
+export function Topbar({ title, breadcrumbs, onMenuClick }: TopbarProps) {
   const { user, logout } = useAuth()
   const { theme, setTheme } = useTheme()
   const router = useRouter()
@@ -43,16 +44,29 @@ export function Topbar({ title, breadcrumbs }: TopbarProps) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 right-0 left-0 lg:left-80 h-16 bg-card border-b border-border z-40"
+      className="fixed top-0 right-0 left-0 lg:left-64 h-16 md:h-20 bg-card border-b border-border z-30"
     >
-      <div className="h-full px-6 flex items-center justify-between">
+      <div className="h-full px-4 md:px-6 flex items-center justify-between gap-4">
+        {/* Menu Button - Mobile */}
+        {onMenuClick && (
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden p-2 hover:bg-secondary rounded-lg transition-colors text-foreground"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        )}
+
         {/* Left Side - Title and Breadcrumbs */}
-        <div className="flex flex-col gap-1">
+        <div className="flex-1 flex flex-col gap-1 min-w-0">
           {title && (
-            <h1 className="text-lg font-bold text-foreground">{title}</h1>
+            <h1 className="text-base md:text-lg font-bold text-foreground truncate">{title}</h1>
           )}
           {breadcrumbs && breadcrumbs.length > 0 && (
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+            <nav className="hidden md:flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
               {breadcrumbs.map((crumb, index) => (
                 <div key={index} className="flex items-center gap-2">
                   {crumb.href ? (
@@ -72,7 +86,7 @@ export function Topbar({ title, breadcrumbs }: TopbarProps) {
         </div>
 
         {/* Right Side - Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* Theme Toggle */}
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -82,9 +96,9 @@ export function Topbar({ title, breadcrumbs }: TopbarProps) {
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? (
-              <Sun size={20} />
+              <Sun size={18} className="md:w-5 md:h-5" />
             ) : (
-              <Moon size={20} />
+              <Moon size={18} className="md:w-5 md:h-5" />
             )}
           </motion.button>
 

@@ -32,21 +32,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-6 md:py-0">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           {/* Header */}
           <div className="space-y-2 text-center">
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl font-bold text-foreground"
+              className="text-3xl md:text-4xl font-bold text-foreground"
             >
               Welcome Back
             </motion.h1>
@@ -54,7 +54,7 @@ export default function LoginPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-muted-foreground"
+              className="text-sm md:text-base text-muted-foreground"
             >
               Sign in to your account to continue
             </motion.p>
@@ -66,11 +66,11 @@ export default function LoginPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
             onSubmit={handleSubmit}
-            className="space-y-6 bg-card border border-border rounded-lg p-8"
+            className="space-y-6 bg-card border border-border rounded-lg p-6 md:p-8"
           >
             {/* Email Field */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-foreground font-medium">
+              <Label htmlFor="email" className="text-foreground font-medium text-sm md:text-base">
                 Email Address
               </Label>
               <Input
@@ -80,14 +80,14 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
-                className="h-11 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                className="h-10 md:h-11 bg-input border-border text-foreground placeholder:text-muted-foreground text-sm md:text-base"
                 required
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-foreground font-medium">
+              <Label htmlFor="password" className="text-foreground font-medium text-sm md:text-base">
                 Password
               </Label>
               <Input
@@ -97,7 +97,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
-                className="h-11 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                className="h-10 md:h-11 bg-input border-border text-foreground placeholder:text-muted-foreground text-sm md:text-base"
                 required
               />
             </div>
@@ -110,7 +110,7 @@ export default function LoginPage() {
                 onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                 disabled={isLoading}
               />
-              <Label htmlFor="remember" className="text-sm font-normal text-foreground cursor-pointer">
+              <Label htmlFor="remember" className="text-xs md:text-sm font-normal text-foreground cursor-pointer">
                 Remember me
               </Label>
             </div>
@@ -120,7 +120,7 @@ export default function LoginPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="p-3 bg-destructive/10 border border-destructive/30 rounded text-destructive text-sm"
+                className="p-3 bg-destructive/10 border border-destructive/30 rounded text-destructive text-xs md:text-sm"
               >
                 {error}
               </motion.div>
@@ -130,7 +130,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
+              className="w-full h-10 md:h-11 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-sm md:text-base"
             >
               {isLoading ? 'Signing In...' : 'Sign In'}
             </Button>
@@ -141,7 +141,7 @@ export default function LoginPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-center text-sm text-muted-foreground"
+            className="text-center text-xs md:text-sm text-muted-foreground"
           >
             Demo: Use any email and password to login
           </motion.p>
